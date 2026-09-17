@@ -20,7 +20,7 @@ def mkMove(move, tab):
     N = len(tab)
     M = len(tab[0])
     r, c = 0, 0
-    S = 10000
+    S = 20000
     for i in range(S):
         for k in move:
             if k == 'G':
@@ -45,19 +45,20 @@ def mkMove(move, tab):
         #print('dodane', r, c)
 
 
-move = 'PD'
+move = ['PD', 'PPD', 'PDD']
 N, M = 4, 4
-for i in range(2, 12):
+for i in range(2, 20):
     N = i
-    for j in range(2, 12):
+    for j in range(2, 20):
         M = j
         tab = createTab(N,M)
-
-        mkMove(move, tab)
+        ss = False
+        for m in move:
+            mkMove(m, tab)
         #drawTab(tab)
+            if checkIfAll(tab):
+                ss = True
 
-        if checkIfAll(tab):
-            print(N, M,"sukces")
-        else:
+        if not ss:
             print(N, M, "porażka")
-
+            #drawTab(tab)
