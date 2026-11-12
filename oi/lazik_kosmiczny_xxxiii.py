@@ -1,5 +1,6 @@
 import math
 
+err = 0
 def createTab(n, m):
     tab = []
     for i in range(n):
@@ -49,20 +50,20 @@ def mkMove(move, tab):
         #print('dodane', r, c)
 
 
-move = ['PD', 'DP', 'PPD', 'DDP', 'PPPD', 'DDDP', 'DDPP', 'PPDD', 'DDDDP' ]
+move = ['PD', 'DP', 'PPD', 'DDP', 'PPPD', 'DDDP', 'DDPP', 'PPDD', 'DDDDP', 'PPPPD' ]
 
-
+succeded = []
 def test():
     N, M = 4, 4
     stat = {}
     for i in range(2, 5):
         stat[i] = []
-    for i in range(2, 50):
+    for i in range(2, 30):
         N = i
-        for j in range(2, 50):
+        for j in range(2, 30):
             M = j
             tab = createTab(N,M)
-            ss = False
+            ss = -1
             for m in move:
                 mkMove(m, tab)
               #if N == 4 and M == 4:
@@ -79,11 +80,12 @@ def test():
                 #drawTab(tab)
 
 def test2():
+    global err
     N, M = 4, 4
     stat = {}
-    for i in range(2, 50):
+    for i in range(2, 30):
         N = i
-        for j in range(2, 50):
+        for j in range(2, 30):
             M = j
             tab = createTab(N,M)
             ss = False
@@ -100,11 +102,13 @@ def test2():
                         stat[m].add( r)
     
             if not ss:
+                err += 1
                 print("nieudane", N, M, math.gcd(N, M))
     for m, tab in stat.items():
         print(m, list(tab))
 
 test2()
+print("błędnych",err)
 #tab = createTab(4, 4)
 #mkMove(move[2], tab)
 
